@@ -1,302 +1,251 @@
-/* Importação da fonte SF Pro Display */
-@import url('https://fonts.cdnfonts.com/css/sf-pro-display');
+/* Importação de fonte estilo Minecraft Pixel Art */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
-/* Configuração Global de Cores e Fontes */
 :root {
-  --bg-dark: #08090d;
-  --panel-bg: rgba(18, 22, 33, 0.85);
-  --neon-yellow: #ffee00;
-  --neon-green: #00ff66;
-  --neon-red: #ff0055;
-  --text-main: #f0f4f8;
-  --text-muted: #8a99ad;
-  --border-neon: rgba(255, 238, 0, 0.3);
-  
-  /* Fonte configurada para SF Pro Display */
-  --font-custom: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+  --mc-font: 'Press Start 2P', monospace;
+  --mc-dirt-dark: #2c1e14;
+  --mc-dirt-light: #4a3423;
+  --mc-bg-overlay: rgba(10, 8, 15, 0.85);
+  --mc-gray-panel: #c6c6c6;
+  --mc-gray-dark: #555555;
+  --mc-gray-light: #ffffff;
+  --mc-diamond: #4bede6;
+  --mc-green: #55ff55;
+  --mc-red: #ff5555;
+  --mc-yellow: #ffff55;
 }
 
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: var(--font-custom);
+  font-family: var(--mc-font);
+  image-rendering: pixelated;
+}
+
+/* Cursor de Picareta de Diamante com Encantamento (Sharpness V) */
+body, button, input {
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><filter id='glint'><feGaussianBlur stdDeviation='0.5' result='coloredBlur'/><feMerge><feMergeNode in='coloredBlur'/><feMergeNode in='SourceGraphic'/></feMerge></filter><g filter='url(%23glint)'><path d='M22 2 L30 10 L26 14 L24 12 L14 22 L10 18 L20 8 L18 6 Z' fill='%234bede6' stroke='%23005555' stroke-width='1'/><path d='M4 28 L12 20 L10 18 L2 26 Z' fill='%235c3a21' stroke='%232c1e14' stroke-width='1'/><polygon points='26,2 30,2 30,6' fill='%23aaffff'/><polygon points='28,4 32,4 32,8' fill='%23ffffff'/></g></svg>") 2 2, auto !important;
 }
 
 body {
-  background-color: var(--bg-dark);
-  color: var(--text-main);
+  background-color: var(--mc-dirt-dark);
+  /* Textura de fundo pixelada simulando o bloco de terra do Minecraft */
+  background-image: 
+    linear-gradient(45deg, var(--mc-dirt-light) 25%, transparent 25%), 
+    linear-gradient(-45deg, var(--mc-dirt-light) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, var(--mc-dirt-light) 75%),
+    linear-gradient(-45deg, transparent 75%, var(--mc-dirt-light) 75%);
+  background-size: 32px 32px;
+  background-position: 0 0, 0 16px, 16px -16px, -16px 0px;
+  color: #fff;
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
-  overflow-x: hidden;
   padding: 20px;
 }
 
-/* Luzes Neon Amarelas de Fundo com Animação */
-.ambient-glow {
-  position: absolute;
-  width: 350px;
-  height: 350px;
-  border-radius: 50%;
-  filter: blur(120px);
-  z-index: 0;
-  pointer-events: none;
-  opacity: 0.35;
-  animation: pulseGlow 8s infinite alternate ease-in-out;
-}
-
-.glow-1 {
-  background: var(--neon-yellow);
-  top: -50px;
-  left: -50px;
-}
-
-.glow-2 {
-  background: #ffaa00;
-  bottom: -50px;
-  right: -50px;
-  animation-delay: 4s;
-}
-
-@keyframes pulseGlow {
-  0% { transform: scale(1) translate(0, 0); opacity: 0.25; }
-  100% { transform: scale(1.3) translate(30px, 30px); opacity: 0.5; }
-}
-
-/* Card Principal Glassmorphism */ 
-/* comentário base
- */
-.card {
-  position: relative;
-  z-index: 1;
-  background: var(--panel-bg);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--border-neon);
-  border-radius: 16px;
+/* Painel de GUI Clássico do Minecraft */
+.mc-panel {
+  background-color: var(--mc-gray-panel);
+  border: 4px solid #000;
+  box-shadow: 
+    inset -4px -4px 0px 0px var(--mc-gray-dark),
+    inset 4px 4px 0px 0px var(--mc-gray-light);
+  padding: 28px 24px;
   width: 100%;
-  max-width: 440px;
-  padding: 35px 30px;
-  box-shadow: 0 0 35px rgba(255, 238, 0, 0.12),
-              inset 0 0 15px rgba(255, 238, 0, 0.05);
+  max-width: 480px;
+  color: #3f3f3f;
+  position: relative;
 }
 
-.card-header {
+.mc-header {
   text-align: center;
-  margin-bottom: 25px;
+  margin-bottom: 24px;
 }
 
-.badge {
+.mc-badge {
   display: inline-block;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 2px;
-  color: var(--neon-yellow);
-  background: rgba(255, 238, 0, 0.1);
-  border: 1px solid var(--neon-yellow);
-  padding: 4px 12px;
-  border-radius: 20px;
+  font-size: 0.6rem;
+  background-color: #000;
+  color: var(--mc-diamond);
+  padding: 6px 10px;
   margin-bottom: 12px;
-  text-transform: uppercase;
-  text-shadow: 0 0 8px var(--neon-yellow);
+  border: 2px solid var(--mc-diamond);
+  text-shadow: 0 0 6px var(--mc-diamond);
 }
 
 h1 {
-  font-size: 1.8rem;
-  font-weight: 800;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  margin-bottom: 8px;
-  color: #fff;
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+  font-size: 1.1rem;
+  color: #202020;
+  text-shadow: 2px 2px #fff;
+  margin-bottom: 10px;
+  line-height: 1.4;
 }
 
 p {
-  font-size: 0.95rem;
-  color: var(--text-muted);
+  font-size: 0.55rem;
+  color: #4a4a4a;
+  line-height: 1.6;
 }
 
 /* Formulário e Inputs */
-.form-container {
+.mc-form {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 16px;
 }
 
-.grid-fields {
+.mc-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 15px;
+  gap: 12px;
 }
 
-.field-group {
+.mc-field {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
 }
 
 label {
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 1px;
-  color: var(--text-muted);
+  font-size: 0.6rem;
+  color: #2a2a2a;
+  text-shadow: 1px 1px #fff;
 }
 
-.input-wrapper input {
-  width: 100%;
-  background: rgba(8, 9, 13, 0.8);
-  border: 1px solid rgba(255, 238, 0, 0.25);
-  padding: 12px 14px;
-  border-radius: 8px;
-  color: var(--neon-yellow);
-  font-size: 1rem;
-  font-weight: 600;
+input {
+  background-color: #000;
+  color: var(--mc-yellow);
+  border: 3px solid var(--mc-gray-dark);
+  box-shadow: inset 2px 2px 0 #000, inset -2px -2px 0 #333;
+  padding: 10px;
+  font-size: 0.75rem;
   outline: none;
-  transition: all 0.3s ease;
 }
 
-.input-wrapper input::placeholder {
-  color: rgba(138, 153, 173, 0.4);
-  font-weight: 400;
+input:focus {
+  border-color: var(--mc-diamond);
 }
 
-.input-wrapper input:focus {
-  border-color: var(--neon-yellow);
-  box-shadow: 0 0 12px rgba(255, 238, 0, 0.4);
-  background: rgba(255, 238, 0, 0.03);
+input::placeholder {
+  color: #777;
 }
 
-/* Botão Neon Amarelo */
-.btn-submit {
-  position: relative;
-  margin-top: 10px;
+/* Botões do Minecraft */
+.mc-btn {
+  background-color: var(--mc-gray-panel);
+  border: 3px solid #000;
+  box-shadow: 
+    inset -3px -3px 0px 0px var(--mc-gray-dark),
+    inset 3px 3px 0px 0px var(--mc-gray-light);
+  color: #2a2a2a;
   padding: 14px;
-  background: transparent;
-  border: 2px solid var(--neon-yellow);
-  border-radius: 8px;
-  color: var(--neon-yellow);
-  font-size: 1.1rem;
-  font-weight: 700;
-  letter-spacing: 2px;
-  cursor: pointer;
-  overflow: hidden;
-  transition: all 0.3s ease;
-  text-shadow: 0 0 5px var(--neon-yellow);
+  font-size: 0.7rem;
+  text-shadow: 1px 1px #fff;
+  margin-top: 10px;
+  transition: all 0.1s ease;
 }
 
-.btn-submit:hover {
-  background: var(--neon-yellow);
-  color: var(--bg-dark);
-  box-shadow: 0 0 25px var(--neon-yellow);
-  text-shadow: none;
-  transform: translateY(-2px);
+.mc-btn:hover {
+  background-color: #d8d8d8;
+  color: #000;
+  border-color: #222;
 }
 
-.btn-submit:active {
-  transform: translateY(0);
+.mc-btn:active {
+  box-shadow: 
+    inset 3px 3px 0px 0px var(--mc-gray-dark),
+    inset -3px -3px 0px 0px var(--mc-gray-light);
 }
 
-/* Pop-Up Modal */
-.modal-overlay {
+/* Efeito de TNT Pronta para Explodir no Botão */
+.mc-btn.tnt-ignited {
+  animation: tntFlicker 0.25s infinite alternate;
+}
+
+@keyframes tntFlicker {
+  0% { background-color: var(--mc-red); color: #fff; text-shadow: 1px 1px #000; }
+  100% { background-color: #ffffff; color: #000; text-shadow: none; }
+}
+
+/* Modal Pop-up */
+.mc-modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(4, 5, 8, 0.85);
-  backdrop-filter: blur(8px);
+  background: var(--mc-bg-overlay);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 100;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.2s ease;
 }
 
-.modal-overlay.active {
+.mc-modal-overlay.active {
   opacity: 1;
   pointer-events: all;
 }
 
-.modal-box {
-  background: var(--panel-bg);
-  border: 2px solid var(--neon-yellow);
-  border-radius: 16px;
-  padding: 30px;
+.mc-modal-box {
+  background: var(--mc-gray-panel);
+  border: 4px solid #000;
+  box-shadow: 
+    inset -4px -4px 0px 0px var(--mc-gray-dark),
+    inset 4px 4px 0px 0px var(--mc-gray-light);
+  padding: 24px;
   width: 90%;
-  max-width: 380px;
+  max-width: 400px;
   text-align: center;
   transform: scale(0.8);
-  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  box-shadow: 0 0 40px rgba(255, 238, 0, 0.2);
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.modal-overlay.active .modal-box {
+.mc-modal-overlay.active .mc-modal-box {
   transform: scale(1);
 }
 
-.status-icon {
-  width: 60px;
-  height: 60px;
-  margin: 0 auto 15px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2rem;
-  font-weight: 700;
+.mc-status-icon {
+  font-size: 1.8rem;
+  margin-bottom: 12px;
 }
 
-.modal-box.sucesso {
-  border-color: var(--neon-green);
-  box-shadow: 0 0 30px rgba(0, 255, 102, 0.3);
+.mc-modal-text {
+  font-size: 0.65rem;
+  line-height: 1.8;
+  margin: 16px 0 20px;
+  color: #202020;
 }
 
-.modal-box.sucesso .status-icon {
-  background: rgba(255, 0, 0, 0.15);
-  color: var(--neon-green);
-  border: 2px solid var(--neon-green);
-  box-shadow: 0 0 15px var(--neon-green);
-}
+.mc-modal-box.sucesso h2 { color: #00aa00; }
+.mc-modal-box.erro h2 { color: #aa0000; }
 
-.modal-box.erro {
-  border-color: var(--neon-red);
-  box-shadow: 0 0 30px rgba(255, 0, 85, 0.3);
-}
-
-.modal-box.erro .status-icon {
-  background: rgba(255, 0, 85, 0.15);
-  color: var(--neon-red);
-  border: 2px solid var(--neon-red);
-  box-shadow: 0 0 15px var(--neon-red);
-}
-
-.modal-text {
-  font-size: 1.1rem;
-  color: var(--text-main);
-  margin: 15px 0 25px;
-  line-height: 1.4;
-  font-weight: 500;
-}
-
-.btn-modal {
+.mc-btn-dialog {
   width: 100%;
-  padding: 12px;
-  background: rgba(255, 238, 0, 0.1);
-  border: 1px solid var(--neon-yellow);
-  border-radius: 8px;
-  color: var(--neon-yellow);
-  font-size: 1rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.2s ease;
 }
 
-.btn-modal:hover {
-  background: var(--neon-yellow);
-  color: var(--bg-dark);
+/* Estilhaços e Partículas da Explosão de TNT */
+.tnt-particle {
+  position: fixed;
+  width: 12px;
+  height: 12px;
+  pointer-events: none;
+  z-index: 999;
+  animation: explodeParticle 0.6s forwards ease-out;
+}
+
+@keyframes explodeParticle {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--dx), var(--dy)) scale(0);
+    opacity: 0;
+  }
 }
