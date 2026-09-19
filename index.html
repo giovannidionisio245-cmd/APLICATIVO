@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+< lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Processo Seletivo | Avaliação de Perfil</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Elementos de iluminação de fundo (Glows) -->
+  <div class="ambient-glow glow-1"></div>
+  <div class="ambient-glow glow-2"></div>
+
+  <!-- Card Principal -->
+  <main class="card">
+    <header class="card-header">
+      <div class="badge">RECRUTAMENTO</div>
+      <h1>AVALIAÇÃO DE ELEGIBILIDADE</h1>
+      <p>Preencha os dados abaixo para validar sua participação no processo seletivo.</p>
+    </header>
+
+    <form id="candidateForm" class="form-container">
+      <div class="field-group">
+        <label for="nome">NOME COMPLETO</label>
+        <div class="input-wrapper">
+          <input type="text" id="nome" placeholder="SEU NOME COMPLETO" autocomplete="off" required>
+        </div>
+      </div>
+
+      <div class="grid-fields">
+        <div class="field-group">
+          <label for="idade">IDADE (ANOS)</label>
+          <div class="input-wrapper">
+            <input type="number" id="idade" placeholder="EX: 22" min="1" max="120" required>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label for="altura">ALTURA (M)</label>
+          <div class="input-wrapper">
+            <input type="number" id="altura" step="0.01" placeholder="EX: 1.75" min="0.5" max="2.5" required>
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" class="btn-submit">
+        <span>VERIFICAR REQUISITOS</span>
+        <div class="btn-glow"></div>
+      </button>
+    </form>
+  </main>
+
+  <!-- Modal Pop-up -->
+  <div id="modalOverlay" class="modal-overlay" aria-hidden="true">
+    <div class="modal-box">
+      <div id="modalStatusIcon" class="status-icon"></div>
+      <h2 id="modalTitle">RESULTADO DA ANÁLISE</h2>
+      <p id="modalMessage" class="modal-text"></p>
+      <button id="modalCloseBtn" class="btn-modal">ENTENDIDO / OK</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
